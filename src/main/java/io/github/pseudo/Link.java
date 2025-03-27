@@ -30,7 +30,7 @@ public class Link {
 
     @Override
     public String toString() {
-        return node1 + " " + node2;
+        return node1.getIndex() + " " + node2.getIndex();
     }
 
     
