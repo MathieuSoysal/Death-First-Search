@@ -20,7 +20,7 @@ public class Node {
 
     public void setAsPaserelle()
     {
-        this.kind = KindNode.Normal;
+        this.kind = KindNode.Paserelle;
     }
 
     public boolean isPaserelle()
