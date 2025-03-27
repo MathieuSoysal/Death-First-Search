@@ -49,4 +49,30 @@ class GameManagerTest {
         assertEquals(link.getNode1().getIndex(), 1);
         assertEquals(link.getNode2().getIndex(), 2);
     }
+
+    @Test
+    void testGetNearestClosableLink_hard() {
+        int nbNoeuds = 15;
+        GameManager gameManager = new GameManager(nbNoeuds);
+        gameManager.addLink(0, 1);
+
+        gameManager.addLink(1, 2);
+        gameManager.setAsPaserelle(2);
+
+        gameManager.addLink(1, 3);
+        gameManager.addLink(3, 4);
+        gameManager.addLink(3, 5);
+        gameManager.setAsPaserelle(4);
+        gameManager.setAsPaserelle(5);
+
+        gameManager.addLink(0, 6);
+        gameManager.addLink(6, 7);
+        gameManager.addLink(7, 8);
+        gameManager.addLink(7, 9);
+        gameManager.setAsPaserelle(8);
+        gameManager.setAsPaserelle(9);
+
+        Link link = gameManager.getNearestClosableLink(0);
+        assertEquals(link.getNode1().getIndex(), 3);
+    }
 }
