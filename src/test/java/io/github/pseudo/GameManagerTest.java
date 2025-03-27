@@ -32,4 +32,21 @@ class GameManagerTest {
 
         assertTrue(gameManager.getNode(1).isPaserelle());
     }
+
+    @Test
+    void testGetNearestClosableLink() {
+        int nbNoeuds = 5;
+        GameManager gameManager = new GameManager(nbNoeuds);
+        gameManager.addLink(0, 1);
+        gameManager.addLink(1, 2);
+        gameManager.addLink(2, 3);
+        gameManager.addLink(3, 4);
+        gameManager.addLink(4, 0);
+        gameManager.setAsPaserelle(2);
+        gameManager.setAsPaserelle(4);
+
+        Link link = gameManager.getNearestClosableLink(1);
+        assertEquals(link.getNode1().getIndex(), 1);
+        assertEquals(link.getNode2().getIndex(), 2);
+    }
 }
