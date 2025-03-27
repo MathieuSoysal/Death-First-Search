@@ -24,6 +24,7 @@ public class Player {
             int SI = in.nextInt();
             Link link = gameManager.getNearestClosableLink(SI);
             System.out.println(link);
+            link.close();
         }
     }
 
