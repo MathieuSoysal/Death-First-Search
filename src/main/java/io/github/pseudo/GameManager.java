@@ -31,22 +31,7 @@ public class GameManager {
     }
 
     public Link getNearestClosableLink(int node) {
-        Queue<Node> queue = new LinkedList<>();
-        queue.add(nodes[node]);
-        boolean[] visited = new boolean[nbNoeuds + 1];
-        visited[node] = true;
-        while (!queue.isEmpty()) {
-            Node currentNode = queue.poll();
-            for (Link link : currentNode.getLinks()) {
-                if (link.canBeClose())
-                    return link;
-                Node nextNode = link.getNode1() == currentNode ? link.getNode2() : link.getNode1();
-                if (!visited[nextNode.getIndex()]) {
-                    visited[nextNode.getIndex()] = true;
-                    queue.add(nextNode);
-                }
-            }
-        }
-        return null;
+        return DFS.foundMaxUrgentNode(this.getNode(node), nbNoeuds);
     }
+
 }
