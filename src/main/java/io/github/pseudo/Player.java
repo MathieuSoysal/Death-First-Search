@@ -12,12 +12,12 @@ public class Player {
 
         GameManager gameManager = new GameManager(nbNoeuds);
         for (int i = 0; i < nbLiens; i++) {
-            int N1 = in.nextInt(); 
+            int N1 = in.nextInt();
             int N2 = in.nextInt();
             gameManager.addLink(N1, N2);
         }
         for (int i = 0; i < nbPasserelle; i++) {
-            int EI = in.nextInt(); 
+            int EI = in.nextInt();
             gameManager.setAsPaserelle(EI);
         }
         while (true) {

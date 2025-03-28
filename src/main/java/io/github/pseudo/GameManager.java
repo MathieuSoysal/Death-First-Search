@@ -1,7 +1,5 @@
 package io.github.pseudo;
 
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.stream.IntStream;
 
 public class GameManager {
@@ -31,7 +29,7 @@ public class GameManager {
     }
 
     public Link getNearestClosableLink(int node) {
-        return DFS.foundMaxUrgentNode(getNode(node), nbNoeuds);
+        return DFS.foundMostUrgentLink(getNode(node), nbNoeuds);
     }
 
 }
