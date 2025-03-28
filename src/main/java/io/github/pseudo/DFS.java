@@ -6,7 +6,7 @@ public class DFS {
     private static Node urgentestNode = null;
 
     public static Link foundMaxUrgentNode(Node node, int nbNodes) {
-        MAX_URGENCE = -1;
+        MAX_URGENCE = Integer.MIN_VALUE;
         urgentestNode = null;
         boolean[] visited = new boolean[nbNodes + 1];
         foundMaxUrgentNode(visited, node, 1);
