@@ -1,25 +1,35 @@
-package io.github.mathieusoysal;
+package io.github.mathieusoysal.strategies;
 
-public class DFS {
+import static io.github.mathieusoysal.strategies.ScoreCalculator.calculateScore;
 
-    private static int MAX_URGENCE = -1;
-    private static Node urgentestNode = null;
+import io.github.mathieusoysal.entities.Link;
+import io.github.mathieusoysal.entities.Node;
 
-    public static Link foundMostUrgentLink(Node node, int nbNodes) {
-        MAX_URGENCE = Integer.MIN_VALUE;
+public class DFS implements SearchAlgorithm {
+
+    private int highestUrgencyValue = -1;
+    private Node mostUrgentNode = null;
+
+    @Override
+    public Link execute(Node currentNode, int nbNodes) {
+        return foundMostUrgentLink(currentNode, nbNodes);
+    }
+
+    public Link foundMostUrgentLink(Node node, int nbNodes) {
+        highestUrgencyValue = Integer.MIN_VALUE;
         int[] visited = new int[nbNodes + 1];
         for (int i = 0; i < visited.length; i++)
             visited[i] = Integer.MAX_VALUE;
         foundMaxUrgentNode(visited, node, 0);
-        return urgentestNode.getLinks()
+        return mostUrgentNode.getLinks()
                 .stream()
                 .filter(l -> l.canBeClose())
                 .findAny()
-                .get();
+                .orElseThrow(() -> new RuntimeException("No closable link found"));
     }
 
-    private static void foundMaxUrgentNode(int[] historic, Node node, int nbBonusAction) {
-        if (node.isPaserelle())
+    private void foundMaxUrgentNode(int[] historic, Node node, int nbBonusAction) {
+        if (node.isGateway())
             return;
         if (canDoBonusAction(node)) {
             nbBonusAction++;
@@ -27,14 +37,14 @@ public class DFS {
                 return;
             historic[node.getIndex()] = nbBonusAction;
         } else {
-            int score = nbClosableLink(node) - nbBonusAction;
+            int score = calculateScore(node, nbBonusAction);
             if (score <= historic[node.getIndex()]
                     && historic[node.getIndex()] != Integer.MAX_VALUE)
                 return;
             historic[node.getIndex()] = score;
-            if (score > MAX_URGENCE) {
-                MAX_URGENCE = score;
-                urgentestNode = node;
+            if (score > highestUrgencyValue) {
+                highestUrgencyValue = score;
+                mostUrgentNode = node;
             }
         }
         for (Link link : node.getLinks()) {
@@ -45,10 +55,6 @@ public class DFS {
 
     private static boolean canDoBonusAction(Node node) {
         return node.getLinks().stream().allMatch(link -> !link.canBeClose());
-    }
-
-    private static int nbClosableLink(Node node) {
-        return (int) (node.getLinks().stream().filter(link -> link.canBeClose()).count());
     }
 
 }

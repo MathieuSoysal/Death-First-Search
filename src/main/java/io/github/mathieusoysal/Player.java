@@ -2,6 +2,10 @@ package io.github.mathieusoysal;
 
 import java.util.Scanner;
 
+import io.github.mathieusoysal.entities.Link;
+import io.github.mathieusoysal.strategies.DFS;
+import io.github.mathieusoysal.strategies.SearchAlgorithm;
+
 public class Player {
 
     public static void main(String[] args) {
@@ -20,9 +24,11 @@ public class Player {
             int EI = in.nextInt();
             gameManager.setAsPaserelle(EI);
         }
+
+        SearchAlgorithm strategy = new DFS();
         while (true) {
             int SI = in.nextInt();
-            Link link = gameManager.getNearestClosableLink(SI);
+            Link link = gameManager.getNearestClosableLink(SI, strategy);
             link.close();
             System.out.println(link);
         }

@@ -1,11 +1,12 @@
 package io.github.mathieusoysal;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import io.github.mathieusoysal.GameManager;
-import io.github.mathieusoysal.Link;
-
-import static org.junit.jupiter.api.Assertions.*;
+import io.github.mathieusoysal.entities.Link;
+import io.github.mathieusoysal.strategies.DFS;
 
 class GameManagerTest {
 
@@ -28,13 +29,13 @@ class GameManagerTest {
     }
 
     @Test
-    void testSetAsPaserelle() {
+    void testSetAsPasserelle() {
         int nbNoeuds = 5;
         GameManager gameManager = new GameManager(nbNoeuds);
         gameManager.addLink(0, 1);
         gameManager.setAsPaserelle(1);
 
-        assertTrue(gameManager.getNode(1).isPaserelle());
+        assertTrue(gameManager.getNode(1).isGateway());
     }
 
     @Test
@@ -49,7 +50,7 @@ class GameManagerTest {
         gameManager.setAsPaserelle(2);
         gameManager.setAsPaserelle(4);
 
-        Link link = gameManager.getNearestClosableLink(1);
+        Link link = gameManager.getNearestClosableLink(1, new DFS());
         assertEquals(link.getNode1().getIndex(), 1);
         assertEquals(link.getNode2().getIndex(), 2);
     }
@@ -76,7 +77,7 @@ class GameManagerTest {
         gameManager.setAsPaserelle(8);
         gameManager.setAsPaserelle(9);
 
-        Link link = gameManager.getNearestClosableLink(0);
+        Link link = gameManager.getNearestClosableLink(0, new DFS());
         assertEquals(link.getNode1().getIndex(), 3);
     }
 
@@ -101,7 +102,7 @@ class GameManagerTest {
         gameManager.setAsPaserelle(4);
         gameManager.setAsPaserelle(5);
 
-        Link link = gameManager.getNearestClosableLink(0);
+        Link link = gameManager.getNearestClosableLink(0, new DFS());
         assertEquals(link.getNode1().getIndex(), 3);
     }
 }

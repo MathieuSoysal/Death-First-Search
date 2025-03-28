@@ -2,6 +2,10 @@ package io.github.mathieusoysal;
 
 import java.util.stream.IntStream;
 
+import io.github.mathieusoysal.entities.Link;
+import io.github.mathieusoysal.entities.Node;
+import io.github.mathieusoysal.strategies.SearchAlgorithm;
+
 public class GameManager {
     private final Node[] nodes;
     private int nbNoeuds;
@@ -28,8 +32,8 @@ public class GameManager {
         return nodes[index];
     }
 
-    public Link getNearestClosableLink(int node) {
-        return DFS.foundMostUrgentLink(getNode(node), nbNoeuds);
+    public Link getNearestClosableLink(int node, SearchAlgorithm strategy) {
+        return strategy.execute(nodes[node], nbNoeuds);
     }
 
 }

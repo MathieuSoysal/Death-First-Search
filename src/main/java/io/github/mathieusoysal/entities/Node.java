@@ -1,4 +1,4 @@
-package io.github.mathieusoysal;
+package io.github.mathieusoysal.entities;
 
 import java.util.ArrayList;
 
@@ -18,11 +18,11 @@ public class Node {
     }
 
     public void setAsPaserelle() {
-        this.kind = KindNode.Paserelle;
+        this.kind = KindNode.Gateway;
     }
 
-    public boolean isPaserelle() {
-        return this.kind == KindNode.Paserelle;
+    public boolean isGateway() {
+        return this.kind == KindNode.Gateway;
     }
 
     public ArrayList<Link> getLinks() {
@@ -62,6 +62,6 @@ public class Node {
 }
 
 enum KindNode {
-    Paserelle,
+    Gateway,
     Normal
 }

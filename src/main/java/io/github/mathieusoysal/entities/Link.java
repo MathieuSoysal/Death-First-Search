@@ -1,4 +1,4 @@
-package io.github.mathieusoysal;
+package io.github.mathieusoysal.entities;
 
 public class Link {
     private final Node node1, node2;
@@ -19,7 +19,7 @@ public class Link {
     }
 
     public boolean canBeClose() {
-        return !isClosed && (node1.isPaserelle() || node2.isPaserelle());
+        return !isClosed && (node1.isGateway() || node2.isGateway());
     }
 
     public Node getNode1() {
