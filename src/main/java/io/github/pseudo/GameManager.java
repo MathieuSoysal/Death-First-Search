@@ -31,7 +31,7 @@ public class GameManager {
     }
 
     public Link getNearestClosableLink(int node) {
-        return DFS.foundMaxUrgentNode(this.getNode(node), nbNoeuds);
+        return DFS.foundMaxUrgentNode(getNode(node), nbNoeuds);
     }
 
 }

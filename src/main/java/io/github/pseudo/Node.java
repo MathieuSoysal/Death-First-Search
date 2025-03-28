@@ -7,8 +7,7 @@ public class Node {
     private final ArrayList<Link> links;
     private KindNode kind;
 
-    public Node(int index)
-    {
+    public Node(int index) {
         this.index = index;
         this.links = new ArrayList<Link>();
         this.kind = KindNode.Normal;
@@ -18,18 +17,20 @@ public class Node {
         links.add(link);
     }
 
-    public void setAsPaserelle()
-    {
+    public void setAsPaserelle() {
         this.kind = KindNode.Paserelle;
     }
 
-    public boolean isPaserelle()
-    {
+    public boolean isPaserelle() {
         return this.kind == KindNode.Paserelle;
     }
 
     public ArrayList<Link> getLinks() {
         return links;
+    }
+
+    public void removeLink(Link link) {
+        links.remove(link);
     }
 
     public int getIndex() {
@@ -59,7 +60,6 @@ public class Node {
     }
 
 }
-
 
 enum KindNode {
     Paserelle,

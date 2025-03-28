@@ -8,8 +8,12 @@ public class DFS {
     public static Link foundMaxUrgentNode(Node node, int nbNodes) {
         MAX_URGENCE = Integer.MIN_VALUE;
         urgentestNode = null;
-        boolean[] visited = new boolean[nbNodes + 1];
-        foundMaxUrgentNode(visited, node, 1);
+        int[] visited = new int[nbNodes + 1];
+        for (int i = 0; i < visited.length; i++)
+            visited[i] = Integer.MAX_VALUE;
+        foundMaxUrgentNode(visited, node, 0);
+        System.err.println(MAX_URGENCE);
+        System.err.println(nbClosableLink(urgentestNode));
         return urgentestNode.getLinks()
                 .stream()
                 .filter(l -> l.canBeClose())
@@ -17,17 +21,23 @@ public class DFS {
                 .get();
     }
 
-    private static void foundMaxUrgentNode(boolean[] visited, Node node, int nbBonusAction) {
-        if (visited[node.getIndex()])
-            return;
-        visited[node.getIndex()] = true;
+    private static void foundMaxUrgentNode(int[] visited, Node node, int nbBonusAction) {
         if (node.isPaserelle())
             return;
-        if (canDoBonusAction(node))
+        if (canDoBonusAction(node)) {
+            if (nbBonusAction >= visited[node.getIndex()])
+                return;
+            visited[node.getIndex()] = nbBonusAction;
             nbBonusAction++;
-        else if (nbClosableLink(node) - nbBonusAction > MAX_URGENCE) {
-            MAX_URGENCE = nbClosableLink(node) - nbBonusAction;
-            urgentestNode = node;
+        } else {
+            int score = nbClosableLink(node) - nbBonusAction;
+            if (visited[node.getIndex()] != Integer.MAX_VALUE && score <= visited[node.getIndex()])
+                return;
+            visited[node.getIndex()] = score;
+            if (score > MAX_URGENCE) {
+                MAX_URGENCE = score;
+                urgentestNode = node;
+            }
         }
         for (Link link : node.getLinks()) {
             Node nextNode = link.getNode1() == node ? link.getNode2() : link.getNode1();

@@ -73,7 +73,7 @@ class GameManagerTest {
         gameManager.setAsPaserelle(9);
 
         Link link = gameManager.getNearestClosableLink(0);
-        assertEquals(link.getNode1().getIndex(), 3);
+        assertEquals(link.getNode1().getIndex(), 1);
     }
 
     @Test

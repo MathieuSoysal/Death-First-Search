@@ -23,8 +23,8 @@ public class Player {
         while (true) {
             int SI = in.nextInt();
             Link link = gameManager.getNearestClosableLink(SI);
-            System.out.println(link);
             link.close();
+            System.out.println(link);
         }
     }
 

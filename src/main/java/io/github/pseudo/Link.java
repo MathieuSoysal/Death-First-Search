@@ -14,6 +14,8 @@ public class Link {
         if (!canBeClose())
             throw new RuntimeException("safe link cannot be close");
         isClosed = true;
+        node1.removeLink(this);
+        node2.removeLink(this);
     }
 
     public boolean canBeClose() {
@@ -32,7 +34,5 @@ public class Link {
     public String toString() {
         return node1.getIndex() + " " + node2.getIndex();
     }
-
-    
 
 }
