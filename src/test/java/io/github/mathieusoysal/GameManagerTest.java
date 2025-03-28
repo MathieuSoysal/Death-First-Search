@@ -1,6 +1,10 @@
-package io.github.pseudo;
+package io.github.mathieusoysal;
 
 import org.junit.jupiter.api.Test;
+
+import io.github.mathieusoysal.GameManager;
+import io.github.mathieusoysal.Link;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameManagerTest {
